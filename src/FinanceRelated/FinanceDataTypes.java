@@ -45,5 +45,6 @@ public class FinanceDataTypes {
         System.out.println("totalInterestPaid = "+totalInterestPaid.toString());
         return totalAmountPaid;
     }
+
 }
 
