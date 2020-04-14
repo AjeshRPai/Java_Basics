@@ -1,4 +1,20 @@
-package DesignPatterns.Creation.Factory;
+package DesignPatterns.Creation;
+
+class NewCarFactory
+{
+	public static Car getCar(CarType carType)
+	{
+		switch(carType)
+		{
+			case SPORTS:
+				return new SportsCar();
+			case OFFROAD:
+				return new SUV();
+			default:
+				return new SportsCar();
+		}
+	}
+}
 
 abstract class Car
 {
@@ -86,3 +102,22 @@ class SUV extends Car
 		return this;
 	}
 }
+
+enum CarType
+{
+	SPORTS,
+	OFFROAD
+}
+
+class Demo
+{
+	public static void main(String[] args)
+	{
+		Car car = NewCarFactory.getCar(CarType.SPORTS);
+		System.out.println("car = " + car);
+
+		Car car1 = NewCarFactory.getCar(CarType.OFFROAD);
+		System.out.println("car1 = " + car1);
+	}
+}
+

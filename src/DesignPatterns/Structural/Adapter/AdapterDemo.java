@@ -1,7 +1,5 @@
 package DesignPatterns.Structural.Adapter;
 
-import sun.nio.cs.US_ASCII;
-
 import java.util.ArrayList;
 import java.util.List;
 
