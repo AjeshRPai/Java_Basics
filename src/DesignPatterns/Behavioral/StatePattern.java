@@ -1,5 +1,8 @@
 package DesignPatterns.Behavioral;
 
+//The state pattern solves problems where an object should change its behavior when its internal state changes.
+// Also, adding new states should not affect the behavior of existing states.
+
 interface State
 {
 	public void doAction();
