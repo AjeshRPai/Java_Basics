@@ -6,11 +6,11 @@ import java.util.Objects;
 // Composing takes only the Functions
 
 @FunctionalInterface
-interface Consumer<T>
+interface ConsumerDesign<T>
 {
 	void accept(T t);
 
-	default Consumer<T> andThen(Consumer<T> other)
+	default ConsumerDesign<T> andThen(ConsumerDesign<T> other)
 	{
 		Objects.requireNonNull(other);
 		return (T t) -> {
@@ -67,12 +67,15 @@ class ConsumerDemo
 {
 	public static void main(String[] args)
 	{
-		Consumer<String> c1 = s -> System.out.println("c1 = " + s);
-		Consumer<String> c2 = s -> System.out.println("C2 = " + s);
-		Consumer<String> c3 = c1.andThen(c2);
-		c3.accept("Hello");
+		ChainingExample();
+		ComposingExample();
 
+	}
+
+	private static void ComposingExample()
+	{
 		Example meteo = new Example(10);
+		int i = 10;
 		Function<Example, Integer> readCelsius = m -> m.getSomething();
 		Function<Integer, Double> celsiusToFahrenheit = t -> t * 9d / 5d + 32d;
 
@@ -80,6 +83,13 @@ class ConsumerDemo
 		readFahrenheit = celsiusToFahrenheit.compose(readCelsius);
 
 		System.out.println("Meteo is F " + readFahrenheit.convert(meteo));
+	}
 
+	private static void ChainingExample()
+	{
+		ConsumerDesign<String> c1 = s -> System.out.println("c1 = " + s);
+		ConsumerDesign<String> c2 = s -> System.out.println("C2 = " + s);
+		ConsumerDesign<String> c3 = c1.andThen(c2);
+		c3.accept("Hello");
 	}
 }
