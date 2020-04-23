@@ -1,5 +1,6 @@
 package DesignPatterns.UsingLambda;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -34,42 +35,6 @@ interface Registry<T>
 		return shape -> map.computeIfAbsent(shape, errorFunction);
 	}
 }
-
-abstract class Shape
-{
-}
-
-class Rectangle extends Shape
-{
-
-	@Override
-	public String toString()
-	{
-		return "Rectangle []";
-	}
-
-}
-
-class Square extends Shape
-{
-
-	@Override
-	public String toString()
-	{
-		return "Square []";
-	}
-}
-
-class Triangle extends Shape
-{
-
-	@Override
-	public String toString()
-	{
-		return "Triangle []";
-	}
-}
-
 class PlayWithRegistryBuilder
 {
 
@@ -110,5 +75,41 @@ class PlayWithRegistryBuilder
 		System.out.println("square = " + square);
 	}
 }
+
+abstract class Shape
+{
+}
+
+class Rectangle extends Shape
+{
+
+	@Override
+	public String toString()
+	{
+		return "Rectangle []";
+	}
+
+}
+
+class Square extends Shape
+{
+
+	@Override
+	public String toString()
+	{
+		return "Square []";
+	}
+}
+
+class Triangle extends Shape
+{
+
+	@Override
+	public String toString()
+	{
+		return "Triangle []";
+	}
+}
+
 
 
