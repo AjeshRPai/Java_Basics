@@ -1,13 +1,13 @@
 package Concurrency;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class ExecutorServiceExample
 {
-	public static class Task implements  Runnable {
+	public static class Task implements java.lang.Runnable
+	{
 		@Override
 		public void run()
 		{

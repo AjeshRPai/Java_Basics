@@ -15,9 +15,10 @@ public class ExecutorExample
 	public static class Invoker implements Executor
 	{
 		@Override
-		public void execute(Runnable command)
+		public void execute(java.lang.Runnable command)
 		{
 			command.run();
+
 		}
 	}
 }
