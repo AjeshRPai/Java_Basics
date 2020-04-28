@@ -1,5 +1,7 @@
 package Concurrency;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 class RaceConditionExample
 {
 	public static void main(String[] args) throws InterruptedException
@@ -14,6 +16,8 @@ class RaceConditionExample
 				for(int i = 0; i < 1_000; i++)
 				{
 					longWrapper.incrementValue();
+					longWrapper.incrementAtomicVariable();
+					longWrapper.incrementVolatile();
 				}
 			}
 		};
@@ -34,6 +38,8 @@ class RaceConditionExample
 		//The result should 1_000 * 1_000 which is 1000000
 		//If the key and Synchronized and the key is deleted, Then race condition will occur
 		System.out.println("long wrapper value " + longWrapper.getValue());
+		System.out.println("volatile long wrapper value " + longWrapper.getVolatile());
+		System.out.println("atomic long wrapper value " + longWrapper.getAtomicVariable());
 	}
 }
 
@@ -42,6 +48,8 @@ class LongWrapper
 	//To Avoid Race Condition
 	private Object key = new Object();
 	private Long l;
+	private volatile Long m = 0L;
+	private AtomicLong n = new AtomicLong(0L);
 
 	public LongWrapper(Long l)
 	{
@@ -50,7 +58,10 @@ class LongWrapper
 
 	public Long getValue()
 	{
-		return l;
+		synchronized(key)
+		{
+			return l;
+		}
 	}
 
 	public void incrementValue()
@@ -60,5 +71,25 @@ class LongWrapper
 		{
 			l = l + 1;
 		}
+	}
+
+	public Long getVolatile()
+	{
+		return m;
+	}
+
+	public void incrementVolatile()
+	{
+		m = m + 1;
+	}
+
+	public AtomicLong getAtomicVariable()
+	{
+		return n;
+	}
+
+	public void incrementAtomicVariable()
+	{
+		n.incrementAndGet();
 	}
 }
