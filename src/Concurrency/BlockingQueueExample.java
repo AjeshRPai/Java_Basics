@@ -15,12 +15,10 @@ public class BlockingQueueExample
 
 	public static void main(String[] args) throws InterruptedException
 	{
-
 		BlockingQueue<String> queue = new ArrayBlockingQueue<>(50);
 
 		class Consumer implements Callable<String>
 		{
-
 			public String call() throws InterruptedException
 			{
 				int count = 0;
@@ -64,7 +62,6 @@ public class BlockingQueueExample
 		try
 		{
 			List<Future<String>> futures = executorService.invokeAll(producersAndConsumers);
-
 			futures.forEach(future -> {
 				try
 				{
@@ -75,7 +72,6 @@ public class BlockingQueueExample
 					System.out.println("Exception: " + e.getMessage());
 				}
 			});
-
 		}
 		finally
 		{
