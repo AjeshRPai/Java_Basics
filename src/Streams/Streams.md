@@ -58,7 +58,7 @@ filter(), map(), etc.
 
 ### **Terminal operations**
 
-Terminal operations ****when called ****traversal of streams begins and the associated function is applied one by one. Intermediate operations are lazy operations, so Streams supports laziness. 
+Terminal operations when called traversal of streams begins and the associated function is applied one by one. Intermediate operations are lazy operations, so Streams supports laziness. 
 
 ---
 
