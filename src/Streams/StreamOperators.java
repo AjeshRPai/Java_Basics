@@ -1,22 +1,31 @@
 package Streams;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.Vector;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StreamOperators
 {
 	public static void main(String[] args)
 	{
 		Employee[] arrayOfEmps = {
-			new Employee(1, "Jeff Bezos", 100000.0),
-			new Employee(2, "Bill Gates", 200000.0),
-			new Employee(3, "Mark Zuckerberg", 300000.0)
+			new Employee(1,
+				"Jeff Bezos",
+				100000.0),
+			new Employee(2,
+				"Bill Gates",
+				200000.0),
+			new Employee(3,
+				"Mark Zuckerberg",
+				300000.0)
 		};
 
 		List<Employee> empList = Arrays.asList(arrayOfEmps);
@@ -41,7 +50,22 @@ public class StreamOperators
 
 		System.out.println("lastemployee = " + lastemployee);
 
-		List<Integer> intList = Arrays.asList(2, 5, 3, 2, 4, 3, 6, 9, 12, 10, 9, 10, 21, 22, 26, 30);
+		List<Integer> intList = Arrays.asList(2,
+			5,
+			3,
+			2,
+			4,
+			3,
+			6,
+			9,
+			12,
+			10,
+			9,
+			10,
+			21,
+			22,
+			26,
+			30);
 		List<Integer> distinctIntList =
 			intList.stream().distinct().collect(Collectors.toList());
 
@@ -60,7 +84,8 @@ public class StreamOperators
 
 		Double sumSal = empList.stream()
 			.map(Employee::getSalary)
-			.reduce(0.0, Double::sum);
+			.reduce(0.0,
+				Double::sum);
 		System.out.println("sumSal = " + sumSal);
 
 		String empNames = empList.stream()
@@ -89,6 +114,36 @@ public class StreamOperators
 		Map<Boolean, List<Integer>> isEven = intList.stream().collect(
 			Collectors.partitioningBy(i -> i % 2 == 0));
 
+		IntPredicate predicate1 = value -> value % 2 == 0;
+		IntPredicate predicate2 = value -> value % 3 == 0;
+		IntPredicate predicate3 = value -> value % 5 == 0;
+
+		Collection<IntPredicate> predicates =
+			Arrays.asList(value -> value % 2 == 0,
+				value -> value % 3 == 0,
+				value -> value % 5 == 0);
+
+		//can also be written as
+		Collection<IntPredicate> predicates2 =
+			Arrays.asList(predicate1,
+				predicate2,
+				predicate3);
+
+		IntStream.rangeClosed(1,
+			100).forEachOrdered(i -> {
+			System.out.print(
+				i + ": " + predicate1.test(i) + " " + predicate2.test(i) + " " + predicate3.test(i) + " -> ");
+			System.out.println(negateEachAndConjunctAll(predicates).test(i));
+		});
+
+	}
+
+	public static IntPredicate negateEachAndConjunctAll(Collection<IntPredicate> predicates)
+	{
+		return predicates.stream()
+			.map(IntPredicate::negate)
+			.reduce(n -> true,
+				IntPredicate::and);
 	}
 
 	private static class Employee
@@ -97,7 +152,9 @@ public class StreamOperators
 		public String name;
 		public Double salary;
 
-		public Employee(int id, String name, double salary)
+		public Employee(int id,
+			String name,
+			double salary)
 		{
 			this.id = id;
 			this.name = name;
