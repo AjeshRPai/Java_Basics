@@ -12,29 +12,23 @@ public class CollectorsExample
 {
 	public static void main(String[] args)
 	{
-		Map<Boolean, List<Account>> partByBalance = getAccounts().stream()
-			.collect(Collectors.partitioningBy(a -> a.getBalance() >= 10000));
+		Map<Boolean, List<Account>> partByBalance = getAccounts().stream().collect(Collectors.partitioningBy(a -> a.getBalance() >= 10000));
 
 		System.out.println("partByBalance = " + partByBalance);
 
-		Map<AccountState, List<Account>> groupingByState = getAccounts().stream()
-			.collect(Collectors.groupingBy(Account::getState));
+		Map<AccountState, List<Account>> groupingByState = getAccounts().stream().collect(Collectors.groupingBy(Account::getState));
 
 		System.out.println("groupingByState = " + groupingByState);
 
-		long summary = getAccounts().stream()
-			.collect(summingLong(Account::getBalance));
+		long summary = getAccounts().stream().collect(summingLong(Account::getBalance));
 
 		System.out.println("summary = " + summary);
 
-		double average = getAccounts().stream()
-			.collect(averagingLong(Account::getBalance));
+		double average = getAccounts().stream().collect(averagingLong(Account::getBalance));
 
 		System.out.println("average = " + average);
 
-		Map<AccountState, Long> sumByStates = getAccounts().stream()
-			.collect(Collectors.groupingBy(Account::getState,
-				summingLong(Account::getBalance)));
+		Map<AccountState, Long> sumByStates = getAccounts().stream().collect(Collectors.groupingBy(Account::getState, summingLong(Account::getBalance)));
 
 		System.out.println("sumByStates = " + sumByStates);
 	}
@@ -43,15 +37,9 @@ public class CollectorsExample
 	{
 		ArrayList<Account> accounts = new ArrayList<>();
 
-		accounts.add(new Account(100L,
-			AccountState.ACTIVE,
-			11414141L));
-		accounts.add(new Account(121000L,
-			AccountState.BLOCKED,
-			11414142L));
-		accounts.add(new Account(131000L,
-			AccountState.REMOVED,
-			11414143L));
+		accounts.add(new Account(100L, AccountState.ACTIVE, 11414141L));
+		accounts.add(new Account(121000L, AccountState.BLOCKED, 11414142L));
+		accounts.add(new Account(131000L, AccountState.REMOVED, 11414143L));
 	/*	accounts.add(new Account(141000L,AccountState.ACTIVE,11414144L));
 		accounts.add(new Account(151000L,AccountState.REMOVED,11414145L));
 		accounts.add(new Account(161000L,AccountState.BLOCKED,11414146L));
@@ -79,9 +67,8 @@ public class CollectorsExample
 		AccountState state;
 		Long number;
 
-		public Account(Long balance,
-			AccountState state,
-			Long number)
+		public Account(
+			Long balance, AccountState state, Long number)
 		{
 			this.balance = balance;
 			this.state = state;
@@ -106,11 +93,7 @@ public class CollectorsExample
 		@Override
 		public String toString()
 		{
-			return "Account{" +
-				"balance=" + balance +
-				", state=" + state +
-				", number=" + number +
-				'}';
+			return "Account{" + "balance=" + balance + ", state=" + state + ", number=" + number + '}';
 		}
 	}
 }
