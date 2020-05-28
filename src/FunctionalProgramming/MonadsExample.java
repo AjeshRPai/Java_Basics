@@ -58,7 +58,9 @@ public class MonadsExample
 
 	public static String getBankNameWhereUserHasAccountWithDataModification(User user)
 	{
-		return Optional.ofNullable(user).flatMap(User::getAccount).flatMap(Account::getBank).flatMap(Bank::getName).orElse("<No bank found>");
+		return "";
+		//commend the below line and make the changes as per above to see the result
+		//return Optional.ofNullable(user).flatMap(User::getAccount).flatMap(Account::getBank).flatMap(Bank::getName).orElse("<No bank found>");
 	}
 
 	/**
