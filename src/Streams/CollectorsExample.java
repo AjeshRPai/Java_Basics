@@ -6,6 +6,8 @@ import static java.util.stream.Collectors.summingLong;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class CollectorsExample
@@ -31,6 +33,23 @@ public class CollectorsExample
 		Map<AccountState, Long> sumByStates = getAccounts().stream().collect(Collectors.groupingBy(Account::getState, summingLong(Account::getBalance)));
 
 		System.out.println("sumByStates = " + sumByStates);
+
+		String customCollector = getAccounts().stream().map(account -> account.balance.toString()).collect(joinectorFunctionalStyle(","));
+
+		System.out.println("customCollector = " + customCollector);
+
+	}
+
+	/**
+	 * REFERENCE
+	 * https://medium.com/better-programming/java-stream-collectors-explained-6209a67a4c29
+	 */
+	static Collector<CharSequence, StringJoiner, String> joinectorFunctionalStyle(CharSequence delimiter)
+	{
+		return Collector.of(() -> new StringJoiner(delimiter), // supplier
+			StringJoiner::add,                 // accumulator
+			StringJoiner::merge,               // combiner
+			StringJoiner::toString);           // finisher
 	}
 
 	private static ArrayList<Account> getAccounts()
