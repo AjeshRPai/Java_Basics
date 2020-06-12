@@ -68,7 +68,7 @@ public class LocksExample
 				+locked);
 		});
 
-		executor.shutdown();
+		stop(executor);
 	}
 
 	// The interface ReadWriteLock specifies another type of
@@ -130,7 +130,7 @@ public class LocksExample
 		executor.submit(readTask);
 		executor.submit(readTask);
 
-		executor.shutdown();
+		stop(executor);
 	}
 
 	//Java 8 ships with a new kind of lock called StampedLock
@@ -197,7 +197,7 @@ public class LocksExample
 		executor.submit(readTask);
 		executor.submit(readTask);
 
-		executor.shutdown();
+		stop(executor);
 	}
 
 	//An optimistic read lock is acquired
@@ -279,7 +279,7 @@ public class LocksExample
 			}
 		});
 
-		executor.shutdown();
+		stop(executor);
 
 	}
 
@@ -358,7 +358,28 @@ public class LocksExample
 
 		IntStream.range(0, 10).forEach(i -> executor.submit(longRunningTask));
 
-		executor.shutdown();
+		stop(executor);
+	}
+
+	static void stop(ExecutorService executor)
+	{
+		try
+		{
+			executor.shutdown();
+			executor.awaitTermination(60, TimeUnit.SECONDS);
+		}
+		catch(InterruptedException e)
+		{
+			System.err.println("termination interrupted");
+		}
+		finally
+		{
+			if(!executor.isTerminated())
+			{
+				System.err.println("killing non-finished tasks");
+			}
+			executor.shutdownNow();
+		}
 	}
 
 }
