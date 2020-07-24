@@ -1,7 +1,6 @@
 package FinanceRelated;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.math.*;
 
 public class FinanceDataTypes {
 
@@ -45,6 +44,7 @@ public class FinanceDataTypes {
         System.out.println("totalInterestPaid = "+totalInterestPaid.toString());
         return totalAmountPaid;
     }
+
 
 }
 
