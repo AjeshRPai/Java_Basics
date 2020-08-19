@@ -1,8 +1,7 @@
 package FunctionalProgramming;
 
-import java.util.Objects;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
 
 /**
  * https://github.com/Tandolf/tutorials/blob/master/src/main/java/se/andolf/tutorials/monads/Try.java
