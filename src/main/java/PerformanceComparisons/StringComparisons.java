@@ -17,7 +17,6 @@ public class StringComparisons {
     private String strParams;
 
     public static void main(String[] args) throws Exception {
-        org.openjdk.jmh.Main.main(args);
     }
 
     @Benchmark
