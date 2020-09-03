@@ -14,6 +14,11 @@ import java.util.concurrent.*;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Measurement(iterations = 10, time = 1)
 public class SetsExamples {
+
+    private Set<String> hashSet;
+    private Set<String> copyOnArraySet;
+    private Set<String> linkedHashSet;
+
     //Sets doesnt allow duplicate Elements
     //
     public static void main(String[] args) throws IOException, RunnerException {
@@ -28,7 +33,7 @@ public class SetsExamples {
         set1.add("item4");
         set1.add("item5");
 
-        //Order is not maintained
+        // Order is not maintained
         // Iteration will take O(table size)
         // as the items are stored according to hash set size
         for (String item : set1) {
@@ -72,27 +77,55 @@ public class SetsExamples {
     }
 
     @Benchmark
+    public static void hashSetInsertionsWithSize() {
+        Set<SomeClass> set = new HashSet<>(1000);
+        for (int i = 0; i < 1000; i++) {
+            set.add(new SomeClass(i, String.valueOf("value of" + i)));
+        }
+    }
+
+    @Benchmark
+    public static void hashSetInsertionsWithoutSize() {
+        Set<SomeClass> set = new HashSet<>();
+        for (int i = 0; i < 1000; i++) {
+            set.add(new SomeClass(i, String.valueOf("value of" + i)));
+        }
+    }
+
+    @Benchmark
     public static void hashSetInsertions() {
-        setInsertions(new HashSet<>());
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < 1000; i++) {
+            set.add(i);
+        }
     }
 
     @Benchmark
     public static void linkedHashSetInsertions() {
-        setInsertions(new LinkedHashSet<>());
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int i = 0; i < 1000; i++) {
+            set.add(i);
+        }
     }
 
     @Benchmark
     public static void CopyOnWriteArraySetInsertions() {
-        setInsertions(new CopyOnWriteArraySet<>());
-    }
-
-
-    public static Set<Integer> setInsertions(Set<Integer> set) {
+        Set<Integer> set = new CopyOnWriteArraySet<>();
         for (int i = 0; i < 1000; i++) {
             set.add(i);
         }
-        return set;
     }
+
+    private static class SomeClass {
+        public Integer someInteger;
+        public String someString;
+
+        public SomeClass(Integer someInteger, String someString) {
+            this.someInteger = someInteger;
+            this.someString = someString;
+        }
+    }
+
 
     public static Set<Integer> iterateSet(Set<Integer> set) {
         for (Integer integer : set) {
