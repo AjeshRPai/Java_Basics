@@ -31,20 +31,30 @@ public class RoundingModeDifferences
 
 		//HALF_DOWN Rounds off to nearest DOWN if the UP and Down is equidistant
 
-		BigDecimal decimal4 = new BigDecimal(decimalValue3).setScale(2, RoundingMode.HALF_DOWN);
-		System.out.println("RoundingMode.HALF_DOWN original =  "+decimalValue3+ " value = "+decimal4);
+        BigDecimal decimal4 = new BigDecimal(decimalValue3).setScale(2, RoundingMode.HALF_DOWN);
+        System.out.println("RoundingMode.HALF_DOWN original =  " + decimalValue3 + " value = " + decimal4);
 
-		// HALF_EVEN Rounds off to nearest even number if the UP and Down is equidistant
-		// Known as bankers rounding
+        // HALF_EVEN Rounds off to nearest even number if the UP and Down is equidistant
+        // Known as bankers rounding
 
-		BigDecimal decimal5 = new BigDecimal(decimalValue4).setScale(0, RoundingMode.HALF_EVEN);
-		System.out.println("RoundingMode.HALF_EVEN original =  "+decimalValue4+ " value = "+decimal5);
+        BigDecimal decimal5 = new BigDecimal(decimalValue4).setScale(0, RoundingMode.HALF_EVEN);
+        System.out.println("RoundingMode.HALF_EVEN original =  " + decimalValue4 + " value = " + decimal5);
 
-	}
+        check("1530533.5565", .80d);
+
+    }
+
+    public static void check(String loanAmount, double colendingPercent) {
+        BigDecimal investorFundAmount = new BigDecimal(loanAmount).multiply(BigDecimal.valueOf(colendingPercent)).setScale(0, RoundingMode.HALF_EVEN);
+
+        BigDecimal cfFundAmount = new BigDecimal(loanAmount).subtract(investorFundAmount);
+
+        System.out.println("total loan Amount =" + loanAmount);
+        System.out.println("investorFundAmount = " + investorFundAmount);
+        System.out.println("cfFundAmount = " + cfFundAmount);
 
 
-
-
+    }
 
 
 }
