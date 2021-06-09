@@ -13,7 +13,9 @@ public class CompositeDisposableExample {
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 
         //Create an Single observer
-        Disposable disposableSingle = Single.just("Hello World").delay(2, TimeUnit.SECONDS, Schedulers.io()).subscribeWith(new DisposableSingleObserver<String>() {
+        Disposable disposableSingle = Single.just("Hello World")
+                .delay(2, TimeUnit.SECONDS, Schedulers.io())
+                .subscribeWith(new DisposableSingleObserver<String>() {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
@@ -26,7 +28,9 @@ public class CompositeDisposableExample {
         });
 
         //Create an observer
-        Disposable disposableMayBe = Maybe.just("Hi").delay(2, TimeUnit.SECONDS, Schedulers.io()).subscribeWith(new DisposableMaybeObserver<String>() {
+        Disposable disposableMayBe = Maybe.just("Hi")
+                .delay(2, TimeUnit.SECONDS, Schedulers.io())
+                .subscribeWith(new DisposableMaybeObserver<String>() {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
