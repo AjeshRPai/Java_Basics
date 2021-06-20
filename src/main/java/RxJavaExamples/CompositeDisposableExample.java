@@ -10,6 +10,7 @@ import java.util.concurrent.*;
 
 public class CompositeDisposableExample {
     public static void main(String[] args) throws InterruptedException {
+
         CompositeDisposable compositeDisposable = new CompositeDisposable();
 
         //Create an Single observer

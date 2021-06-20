@@ -18,7 +18,6 @@ public class ExecutorExample
 		public void execute(java.lang.Runnable command)
 		{
 			command.run();
-
 		}
 	}
 }
