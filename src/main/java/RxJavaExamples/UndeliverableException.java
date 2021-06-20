@@ -7,6 +7,8 @@ import io.reactivex.rxjava3.schedulers.*;
 
 import java.util.concurrent.*;
 
+//https://proandroiddev.com/merging-rxjava-observables-considered-harmful-part-i-fdaaaa3364c5
+
 public class UndeliverableException {
 
     public static void main(String[] args) throws InterruptedException {

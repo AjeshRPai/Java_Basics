@@ -1,4 +1,4 @@
-package RxJavaExamples;
+package RxJavaExamples.Observables;
 
 import io.reactivex.rxjava3.core.*;
 import io.reactivex.rxjava3.subscribers.*;

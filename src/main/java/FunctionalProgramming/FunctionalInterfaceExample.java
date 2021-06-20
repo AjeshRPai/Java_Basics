@@ -1,7 +1,7 @@
 package FunctionalProgramming;
 
 //    Functions accept arguments and produce results.
-//    Operators produce results of the same type as their arguments (special case of function).
+//    RxJavaExamples.Operators produce results of the same type as their arguments (special case of function).
 //    Predicates return boolean values and accept any arguments (boolean-valued function).
 //    Suppliers return values and accept nothing.
 //    Consumers accept arguments and return no result.
